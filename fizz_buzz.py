@@ -5,7 +5,7 @@ class ConcurrentFizzBuzz:
   def __init__(self, n):
     self.lock = Lock() # for editting cur
     self.cur = 1
-    self.n = n
+    self.n = n # where to stop
 
   def is_div_by_3(self):
     return (self.cur % 3) == 0
