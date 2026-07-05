@@ -69,6 +69,13 @@ class Table:
       p = Thread(target=self.eat, args=(i,))
       threads.append(p)
       p.start()
+    
+    # we want the main thread to block until all diners (threads)
+    # are finished
+    for t in threads:
+      t.join()
+
+    print("done!")
 
 table = Table(10)
 table.run()
