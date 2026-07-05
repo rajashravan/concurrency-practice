@@ -15,14 +15,14 @@ class BoundedBlockingQueue:
     def put(self, item):
         with self.not_full:
             while len(self.queue) == self.capacity:
-                self.not_full.wait()      # sleeps here, releases lock while waiting
+                self.not_full.wait()      # release lock and go to sleep atomically
             self.queue.append(item)
             self.not_empty.notify()       # wake up a waiting get()
 
     def get(self):
         with self.not_empty:
             while len(self.queue) == 0:
-                self.not_empty.wait()
+                self.not_empty.wait()     # release lock and go to sleep atomically
             item = self.queue.pop(0)
             self.not_full.notify()        # wake up a waiting put()
             return item
