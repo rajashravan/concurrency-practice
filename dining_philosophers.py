@@ -52,7 +52,7 @@ class Table:
       if not left_acquired:
         print(f"{i}th diner could not get left fork. releasing right.")
         right_fork.release()
-        time.sleep(1) # take a break before grabbing right fork again
+        time.sleep(random.uniform(0.5, 1.5)) # take a break before grabbing right fork again
         continue
         
       # got second fork! eat
